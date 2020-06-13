@@ -14,3 +14,15 @@ edgelabels()
 # どの辺がグループわけを行なっているか？
 # 図より今回は、
 getPhyloGroups(tree)[[6]]
+
+# FTmicrobiomeというデータセットのPF(Phylofactorオブジェクト?)
+# pfにはFactors、Group、binsが含まれている
+pf <- FTmicrobiome$PF
+pf$factors[1:2,1:2]
+# Group1                        Group2
+# Factor 1 40 member Monophyletic clade 250 member Monophyletic clade
+# Factor 2 16 member Monophyletic clade 234 member Paraphyletic clade
+# 要約
+# Factor１では、４０種と２５０種に分離している。
+# 残りの２５０種類が再び分類されて１６種と２３４種類に分類した。
+
