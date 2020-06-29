@@ -12,7 +12,7 @@ tiplabels(1:5,cex=1,adj = -2)
 # エッジ部分の番号を表示：図の緑部分
 edgelabels()
 # どの辺がグループわけを行なっているか？
-# 図より今回は、
+# 図より今回は、「3」と「1 2 4 5」に分割される
 getPhyloGroups(tree)[[6]]
 
 # FTmicrobiomeというデータセットのPF(Phylofactorオブジェクト?)
@@ -25,4 +25,5 @@ pf$factors[1:2,1:2]
 # 要約
 # Factor１では、４０種と２５０種に分離している。
 # 残りの２５０種類が再び分類されて１６種と２３４種類に分類した。
-
+# 各binのサイズを示す
+bins(pf$basis[,1:2]) %>% sapply(length) %>% data.frame('bin.sizes'=.)
