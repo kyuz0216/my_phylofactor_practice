@@ -9,6 +9,13 @@ data("FTmicrobiome")
 ```
 データセットFTmicrobiomeは、二人から採取した糞便および舌の身体部位からの細菌  
 
+## 各データのインポート
+```R
+OTUTable <- FTmicrobiome$OTUTable
+body.site <- FTmicrobiome$X
+tree <- FTmicrobiome$tree
+taxonomy <- FTmicrobiome$taxonomy
+```
 
 ## 回帰分析
 
