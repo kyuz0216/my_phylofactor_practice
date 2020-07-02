@@ -48,7 +48,14 @@ pf.tidy(smry)
 ```
 
 ## 視覚化
-aa  
+phytoolsというライブラリを使用する  
+```R
+library(phytools)
+clr <- function(Matrix) apply(Matrix,MARGIN=2,FUN=function(x) log(x)-mean(log(x)))
+
+par(mfrow=c(1,1))
+phylo.heatmap(tree,clr(PF$Data))
+```
 
 
 # 参考  
