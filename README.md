@@ -38,6 +38,18 @@ PF$factors
 ```
 PF$glms[[1]]
 ```
+標準偏差やp値などの統計情報の確認  
+```R
+summary(aov(PF$glms[[1]]))
+```
+その他、結果の要約  
+```R
+pf.tidy(smry)
+```
+
+## 視覚化
+aa  
+
 
 # 参考  
 https://dfzljdn9uc3pi.cloudfront.net/2017/2969/1/PhyloFactor_tutorial.html
