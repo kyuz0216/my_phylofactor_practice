@@ -2,7 +2,7 @@
 微生物の進化系統分類のパッケージ"phylofactor"の練習リポジトリ
 
 # メモ
-チュートリアルの内容をまとめ  
+チュートリアルの基本事項のみまとめ  
 
 ## 準備
 ```R
@@ -35,10 +35,18 @@ PF <- PhyloFactor(OTUTable,tree,body.site,nfactors=3)
 |  Data  |  上記の例ではOTUTableが該当  |
 |  tree  |  系統樹データ。上記の例では、treeが該当  |
 |   X    | 独立変数。上記の例では,body.siteが該当|
-|  nfactors | 生成するクレードの数。今回の例であれば3つのクレードに分割する|  
+|  nfactors | 生成するクレードの数。今回の例であれば3つのクレードに分割する| 
+| choice | 'var'もしくは'F'を指定|
+
+choiceを変更することで、分割するエッジを変更できる。  
+'var'はclr変換データの残差分散を最小化し、 'F'は分散分析からのF統計を最大化する。  
 
 [参考](https://rdrr.io/github/reptalex/phylofactor/man/PhyloFactor.html)  
 他にも色々引数を設定できる
+
+### 重回帰分析
+glm関数を用いると重回帰分析も可能
+詳細は参考2を参照  
 
 ## 回帰分析の結果  
 分割の重要度  
@@ -105,11 +113,22 @@ getFactoredEdges関数を用いることで、どのエッジで分割されて�
 ```R
 pf.ordination(PF)
 ```
--Binの図示
+- Binの図示
 BINprojection関数を用いることでビンの分類構成を図示せる
 
 ## 予測
-
+pf.predict関数を利用する  
+```R
+prediction <- pf.predict(PF,factors=3)
+par(mfrow=c(2,1))
+phylo.heatmap(tree,clr(PF$Data))
+phylo.heatmap(tree,clr(prediction))
+```
+pf.predictの詳細  
+|  Arguments  |  Details  |
+| ---- | ---- |
+|  PF  |  PhyloFactorオブジェクト  |
+|  factors  |  何個に分割するか？  |
 
 # Reference  
 1, https://rdrr.io/github/reptalex/phylofactor/  
