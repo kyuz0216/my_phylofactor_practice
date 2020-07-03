@@ -2,7 +2,7 @@
 微生物の進化系統分類のパッケージ"phylofactor"の練習リポジトリ
 
 # メモ
-チュートリアルの内容をまとめただけ  
+チュートリアルの内容をまとめ  
 
 ## 準備
 ```R
@@ -59,6 +59,14 @@ smry <- pf.summary(PF,taxonomy,factor=1)
 pf.tidy(smry)
 ```
 
+|  Arguments  |  Details  |
+| ---- | ---- |
+|  PF  |  PhyloFactorオブジェクト  |
+|  taxonomy  |  分類データ  |
+|   factor    | summaryに表示したいFactorの数| 
+
+[参考](https://rdrr.io/github/reptalex/phylofactor/man/pf.summary.html)  
+
 ## 視覚化
 phytoolsというライブラリを使用する  
 ```R
@@ -69,16 +77,40 @@ par(mfrow=c(1,1))
 phylo.heatmap(tree,clr(PF$Data))
 ```
 
-## 要因ごとの違いの確認
-summaryで取得
-ilr : 回帰の従属変数の情報  
+## factorごとの差異の確認
+summaryで取得したデータを使用  
+ilr : 回帰の従属変数を変換した情報(?)。日本語訳では等長対数比変換（ilr; isometric logratio transfor- maton）???  
+[参考](https://rdrr.io/github/reptalex/phylofactor/man/ilrvec.html)  
+MeanRatio : 各グループにおける分類群の幾何平均の比率  
 
+以下は、body.site(今回は、faceとtongue)ごとの差異を箱ひげグラフでプロット　　
 ```R
 par(mfrow=c(1,2))
 plot(body.site,smry$ilr,main='Isometric log-ratio',ylab='ILR balance')
 plot(body.site,smry$MeanRatio,main='Ratio of Geometric Means',ylab='Group1/Group2')
 ```
 
-# 参考  
-https://rdrr.io/github/reptalex/phylofactor/  
-https://dfzljdn9uc3pi.cloudfront.net/2017/2969/1/PhyloFactor_tutorial.html
+## 差異の原因となる細菌を表示
+```R
+smry$TaxaSplit %>%
+      lapply(.,FUN=function(x) unique(x$TaxaIDs))
+```
+この関数によって表示される結果から、両Factorの細菌の差異や数の違いがわかる  
+
+## 結果の図示
+詳細は参考2を参照  
+- 系統樹へのマッピング  
+getFactoredEdges関数を用いることで、どのエッジで分割されているかを色をつけて系統樹に示せる  
+- ILRの分割を座標に表示  
+```R
+pf.ordination(PF)
+```
+-Binの図示
+BINprojection関数を用いることでビンの分類構成を図示せる
+
+## 予測
+
+
+# Reference  
+1, https://rdrr.io/github/reptalex/phylofactor/  
+2, https://dfzljdn9uc3pi.cloudfront.net/2017/2969/1/PhyloFactor_tutorial.html
