@@ -2,6 +2,8 @@
 微生物の進化系統分類のパッケージ"phylofactor"の練習リポジトリ
 
 # メモ
+チュートリアルの内容をまとめただけ  
+
 ## 準備
 ```R
 library(phylofactor)
@@ -57,6 +59,15 @@ par(mfrow=c(1,1))
 phylo.heatmap(tree,clr(PF$Data))
 ```
 
+## 要因ごとの違いの確認
+summaryで取得
+ilr : 回帰の従属変数の情報  
+
+```R
+par(mfrow=c(1,2))
+plot(body.site,smry$ilr,main='Isometric log-ratio',ylab='ILR balance')
+plot(body.site,smry$MeanRatio,main='Ratio of Geometric Means',ylab='Group1/Group2')
+```
 
 # 参考  
 https://dfzljdn9uc3pi.cloudfront.net/2017/2969/1/PhyloFactor_tutorial.html
